@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/activity_main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="example.com.crosswalkdemo.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/main_navigation_back_button"
+            android:layout_width="wrap_content"
+            android:onClick="goBack"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/main_navigation_back"
+            android:src="@drawable/ic_arrow_back_black_24dp"/>
+
+        <ImageButton
+            android:id="@+id/main_navigation_forward_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="goForward"
+            android:contentDescription="@string/main_navigation_forward"
+            android:src="@drawable/ic_arrow_forward_black_24dp"/>
+
+        <ImageButton
+            android:id="@+id/main_navigation_reload_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="reload"
+            android:contentDescription="@string/main_navigation_reload"
+            android:src="@drawable/ic_autorenew_black_24dp"/>
+
+        <EditText
+            android:id="@+id/main_address_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textWebEditText"
+            tools:ignore="LabelFor"/>
+    </LinearLayout>
+
+    <example.com.crosswalkdemo.CustomCrosswalkWebView
+        android:id="@+id/main_crosswalk_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
