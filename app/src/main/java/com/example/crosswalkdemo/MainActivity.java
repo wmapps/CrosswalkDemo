@@ -1,4 +1,4 @@
-package example.com.crosswalkdemo;
+package com.example.crosswalkdemo;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
 
 /**
  * Copyright (c) 2017, WM-Apps
@@ -24,21 +23,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final EditText editText = (EditText) findViewById(R.id.main_address_edit_text);
-        mWebView = (CustomCrosswalkWebView) findViewById(R.id.main_crosswalk_webview);
+        final EditText editText = findViewById(R.id.main_address_edit_text);
+        mWebView = findViewById(R.id.main_crosswalk_webview);
 
-        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent keyEvent) {
-                if ((keyEvent != null && (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) ||
-                    (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT ||
-                     actionId == EditorInfo.IME_ACTION_GO)) {
-                    hideKeyboard();
-                    mWebView.loadUrl(v.getText().toString());
-                }
-
-                return false;
+        editText.setText(R.string.test_url);
+        editText.setOnEditorActionListener((v, actionId, keyEvent) -> {
+            if ((keyEvent != null && (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) ||
+                (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT ||
+                 actionId == EditorInfo.IME_ACTION_GO)) {
+                hideKeyboard();
+                mWebView.loadUrl(v.getText().toString());
             }
+
+            return false;
         });
     }
 
@@ -59,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
         final View view = this.getCurrentFocus();
         if (view != null) {
             final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
         }
     }
 }

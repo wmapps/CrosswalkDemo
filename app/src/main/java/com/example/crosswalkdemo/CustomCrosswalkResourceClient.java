@@ -1,4 +1,4 @@
-package example.com.crosswalkdemo;
+package com.example.crosswalkdemo;
 
 import android.net.http.SslError;
 import android.webkit.ValueCallback;
