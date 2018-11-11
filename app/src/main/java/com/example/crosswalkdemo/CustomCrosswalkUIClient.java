@@ -1,4 +1,4 @@
-package example.com.crosswalkdemo;
+package com.example.crosswalkdemo;
 
 import android.util.Log;
 

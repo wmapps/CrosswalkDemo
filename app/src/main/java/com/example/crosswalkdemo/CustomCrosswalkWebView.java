@@ -1,4 +1,4 @@
-package example.com.crosswalkdemo;
+package com.example.crosswalkdemo;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -23,17 +23,13 @@ public class CustomCrosswalkWebView extends XWalkView {
     public CustomCrosswalkWebView(Context context) {
         super(context);
 
-        if (!isInEditMode()) {
-            init();
-        }
+        init();
     }
 
     public CustomCrosswalkWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        if (!isInEditMode()) {
-            init();
-        }
+        init();
     }
 
     /**
