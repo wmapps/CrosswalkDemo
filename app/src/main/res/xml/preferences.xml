@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:defaultValue="https://"
+        android:dialogTitle="@string/pref_home_page_dialog_title"
+        android:inputType="textUri"
+        android:key="home_page"
+        android:title="@string/pref_home_page"/>
+
+    <EditTextPreference
+        android:defaultValue="@string/default_user_agent"
+        android:dialogTitle="@string/pref_user_agent_dialog_title"
+        android:inputType="text"
+        android:key="user_agent"
+        android:title="@string/pref_user_agent"/>
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="show_debug"
+        android:summary="@string/pref_debug_summary"
+        android:title="@string/pref_debug"/>
+</PreferenceScreen>
