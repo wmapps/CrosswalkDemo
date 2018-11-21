@@ -15,7 +15,7 @@ import org.xwalk.core.XWalkView;
  * Created on 31.01.17.
  */
 public class CustomCrosswalkResourceClient extends XWalkResourceClient {
-    @Nullable private OnDebugMessageListener mListener;
+    @Nullable private OnDebugMessageListener mMessageListener;
 
     public CustomCrosswalkResourceClient(XWalkView view) {
         super(view);
@@ -56,12 +56,12 @@ public class CustomCrosswalkResourceClient extends XWalkResourceClient {
     }
 
     public void setOnDebugMessageListener(@Nullable OnDebugMessageListener listener) {
-        mListener = listener;
+        mMessageListener = listener;
     }
 
     private void postMessage(@Nullable String message) {
-        if (mListener != null) {
-            mListener.onMessage(message);
+        if (mMessageListener != null) {
+            mMessageListener.onMessage(message);
         }
     }
 }
