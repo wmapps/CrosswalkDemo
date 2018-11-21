@@ -1,4 +1,4 @@
-package com.example.crosswalkdemo;
+package com.example.crosswalkdemo.activity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+
+import com.example.crosswalkdemo.view.CustomCrosswalkWebView;
+import com.example.crosswalkdemo.R;
 
 /**
  * Copyright (c) 2017, WM-Apps
