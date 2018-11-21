@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.crosswalkdemo.R;
 import com.example.crosswalkdemo.listener.OnDebugMessageListener;
+import com.example.crosswalkdemo.listener.OnUrlChangedListener;
 import com.example.crosswalkdemo.view.CustomCrosswalkWebView;
 
 /**
@@ -27,7 +28,7 @@ import com.example.crosswalkdemo.view.CustomCrosswalkWebView;
  * <p>
  * Created on 31.01.17.
  */
-public class MainActivity extends AppCompatActivity implements OnDebugMessageListener {
+public class MainActivity extends AppCompatActivity implements OnDebugMessageListener, OnUrlChangedListener {
 
     private SharedPreferences mPreferences;
     private EditText mAddressInput;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements OnDebugMessageLis
         });
         mDebugOutput.setMovementMethod(new ScrollingMovementMethod());
         mWebView.setOnDebugMessageListener(this);
+        mWebView.setOnUrlChangedListener(this);
     }
 
     @Override
@@ -99,6 +101,21 @@ public class MainActivity extends AppCompatActivity implements OnDebugMessageLis
         startActivity(new Intent(this, SettingsActivity.class));
     }
 
+    @Override
+    public void onMessage(@Nullable String message) {
+        if (!TextUtils.isEmpty(message)) {
+            mDebugOutput.append(message);
+            mDebugOutput.append("\n");
+        }
+    }
+
+    @Override
+    public void onChanged(@Nullable String url) {
+        if (url != null) {
+            mAddressInput.setText(url);
+        }
+    }
+
     private void hideKeyboard() {
         // Check if no view has focus
         final View view = this.getCurrentFocus();
@@ -107,14 +124,6 @@ public class MainActivity extends AppCompatActivity implements OnDebugMessageLis
             if (imm != null) {
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
-        }
-    }
-
-    @Override
-    public void onMessage(@Nullable String message) {
-        if (!TextUtils.isEmpty(message)) {
-            mDebugOutput.append(message);
-            mDebugOutput.append("\n");
         }
     }
 }

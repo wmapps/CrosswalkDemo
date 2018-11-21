@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 
 import com.example.crosswalkdemo.listener.OnDebugMessageListener;
+import com.example.crosswalkdemo.listener.OnUrlChangedListener;
 import com.example.crosswalkdemo.view.xwalk.CustomCrosswalkResourceClient;
 import com.example.crosswalkdemo.view.xwalk.CustomCrosswalkUIClient;
 
@@ -79,6 +80,10 @@ public class CustomCrosswalkWebView extends XWalkView {
     public void setOnDebugMessageListener(@Nullable OnDebugMessageListener listener) {
         mResourceClient.setOnDebugMessageListener(listener);
         mUIClient.setOnDebugMessageListener(listener);
+    }
+
+    public void setOnUrlChangedListener(@Nullable OnUrlChangedListener listener) {
+        mUIClient.setOnUrlChangedListener(listener);
     }
 
     /**

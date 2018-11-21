@@ -3,6 +3,7 @@ package com.example.crosswalkdemo.view.xwalk;
 import android.support.annotation.Nullable;
 
 import com.example.crosswalkdemo.listener.OnDebugMessageListener;
+import com.example.crosswalkdemo.listener.OnUrlChangedListener;
 
 import org.xwalk.core.XWalkJavascriptResult;
 import org.xwalk.core.XWalkUIClient;
@@ -15,7 +16,8 @@ import org.xwalk.core.XWalkView;
  */
 public class CustomCrosswalkUIClient extends XWalkUIClient {
     @SuppressWarnings("all") private static final String TAG = CustomCrosswalkUIClient.class.getSimpleName();
-    @Nullable private OnDebugMessageListener mListener;
+    @Nullable private OnDebugMessageListener mMessageListener;
+    @Nullable private OnUrlChangedListener mChangedListener;
 
     public CustomCrosswalkUIClient(XWalkView view) {
         super(view);
@@ -45,6 +47,10 @@ public class CustomCrosswalkUIClient extends XWalkUIClient {
     @Override
     public void onPageLoadStarted(XWalkView view, String url) {
         super.onPageLoadStarted(view, url);
+
+        if (mChangedListener != null) {
+            mChangedListener.onChanged(url);
+        }
 
         postMessage("onPageLoadStarted() with url = [" + url + "]");
     }
@@ -77,13 +83,17 @@ public class CustomCrosswalkUIClient extends XWalkUIClient {
         return super.onJsPrompt(view, url, message, defaultValue, result);
     }
 
+    public void setOnUrlChangedListener(@Nullable OnUrlChangedListener listener) {
+        mChangedListener = listener;
+    }
+
     public void setOnDebugMessageListener(@Nullable OnDebugMessageListener listener) {
-        mListener = listener;
+        mMessageListener = listener;
     }
 
     private void postMessage(@Nullable String message) {
-        if (mListener != null) {
-            mListener.onMessage(message);
+        if (mMessageListener != null) {
+            mMessageListener.onMessage(message);
         }
     }
 }
