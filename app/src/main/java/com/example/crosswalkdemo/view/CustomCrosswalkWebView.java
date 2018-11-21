@@ -1,7 +1,10 @@
-package com.example.crosswalkdemo;
+package com.example.crosswalkdemo.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+
+import com.example.crosswalkdemo.view.xwalk.CustomCrosswalkResourceClient;
+import com.example.crosswalkdemo.view.xwalk.CustomCrosswalkUIClient;
 
 import org.xwalk.core.XWalkNavigationHistory;
 import org.xwalk.core.XWalkPreferences;
@@ -37,7 +40,7 @@ public class CustomCrosswalkWebView extends XWalkView {
      */
     private void init() {
         // Enable remote debugging if in debug build
-        XWalkPreferences.setValue(XWalkPreferences.REMOTE_DEBUGGING, BuildConfig.DEBUG);
+        XWalkPreferences.setValue(XWalkPreferences.REMOTE_DEBUGGING, true);
 
         // Set custom resource client
         setResourceClient(new CustomCrosswalkResourceClient(this));
