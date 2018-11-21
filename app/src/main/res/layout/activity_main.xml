@@ -16,38 +16,70 @@
         <ImageButton
             android:id="@+id/main_navigation_back_button"
             android:layout_width="wrap_content"
-            android:onClick="goBack"
             android:layout_height="wrap_content"
             android:contentDescription="@string/main_navigation_back"
+            android:onClick="goBack"
             android:src="@drawable/ic_arrow_back_black_24dp"/>
 
         <ImageButton
             android:id="@+id/main_navigation_forward_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="goForward"
             android:contentDescription="@string/main_navigation_forward"
+            android:onClick="goForward"
             android:src="@drawable/ic_arrow_forward_black_24dp"/>
 
         <ImageButton
             android:id="@+id/main_navigation_reload_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="reload"
             android:contentDescription="@string/main_navigation_reload"
+            android:onClick="reload"
             android:src="@drawable/ic_autorenew_black_24dp"/>
+
+        <ImageButton
+            android:id="@+id/main_navigation_home_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/main_navigation_home"
+            android:onClick="home"
+            android:src="@drawable/ic_home_black_24dp"/>
 
         <EditText
             android:id="@+id/main_address_edit_text"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:inputType="textUri"
             tools:ignore="LabelFor"/>
+
+        <ImageButton
+            android:id="@+id/main_navigation_settings_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/main_navigation_settings"
+            android:onClick="settings"
+            android:src="@drawable/ic_settings_black_24dp"/>
     </LinearLayout>
 
-    <com.example.crosswalkdemo.view.CustomCrosswalkWebView
-        android:id="@+id/main_crosswalk_webview"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <com.example.crosswalkdemo.view.CustomCrosswalkWebView
+            android:id="@+id/main_crosswalk_webview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/main_debug_text"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="@dimen/activity_vertical_margin"
+            android:visibility="gone"/>
+
+    </LinearLayout>
 </LinearLayout>

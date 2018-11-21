@@ -1,8 +1,11 @@
 package com.example.crosswalkdemo.view;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 
+import com.example.crosswalkdemo.listener.OnDebugMessageListener;
 import com.example.crosswalkdemo.view.xwalk.CustomCrosswalkResourceClient;
 import com.example.crosswalkdemo.view.xwalk.CustomCrosswalkUIClient;
 
@@ -22,6 +25,8 @@ import java.lang.reflect.Method;
 public class CustomCrosswalkWebView extends XWalkView {
 
     private static final String TAG = CustomCrosswalkWebView.class.getSimpleName();
+    private CustomCrosswalkResourceClient mResourceClient;
+    private CustomCrosswalkUIClient mUIClient;
 
     public CustomCrosswalkWebView(Context context) {
         super(context);
@@ -43,12 +48,11 @@ public class CustomCrosswalkWebView extends XWalkView {
         XWalkPreferences.setValue(XWalkPreferences.REMOTE_DEBUGGING, true);
 
         // Set custom resource client
-        setResourceClient(new CustomCrosswalkResourceClient(this));
+        mResourceClient = new CustomCrosswalkResourceClient(this);
+        setResourceClient(mResourceClient);
         // Set custom UI Client
-        setUIClient(new CustomCrosswalkUIClient(this));
-        // Use this to override the user client
-        setUserAgent(this, "My Custom XWalkWebView");
-
+        mUIClient = new CustomCrosswalkUIClient(this);
+        setUIClient(mUIClient);
     }
 
     /**
@@ -57,17 +61,24 @@ public class CustomCrosswalkWebView extends XWalkView {
      * @param view      Crosswalk view
      * @param userAgent Custom user agent
      */
-    private void setUserAgent(XWalkView view, String userAgent) {
+    public void setUserAgent(@Nullable XWalkView view, @Nullable String userAgent) {
         try {
-            final Method getBridgeMethod = XWalkView.class.getDeclaredMethod("getBridge");
-            getBridgeMethod.setAccessible(true);
-            final XWalkViewBridge xWalkViewBridge = (XWalkViewBridge) getBridgeMethod.invoke(view);
-            final XWalkSettingsInternal xWalkSettingsInternal = xWalkViewBridge.getSettings();
-            xWalkSettingsInternal.setUserAgentString(userAgent);
-            xWalkSettingsInternal.setAllowUniversalAccessFromFileURLs(true);
+            if (view != null && !TextUtils.isEmpty(userAgent)) {
+                final Method getBridgeMethod = XWalkView.class.getDeclaredMethod("getBridge");
+                getBridgeMethod.setAccessible(true);
+                final XWalkViewBridge xWalkViewBridge = (XWalkViewBridge) getBridgeMethod.invoke(view);
+                final XWalkSettingsInternal xWalkSettingsInternal = xWalkViewBridge.getSettings();
+                xWalkSettingsInternal.setUserAgentString(userAgent);
+                xWalkSettingsInternal.setAllowUniversalAccessFromFileURLs(true);
+            }
         } catch (Exception ignored) {
 
         }
+    }
+
+    public void setOnDebugMessageListener(@Nullable OnDebugMessageListener listener) {
+        mResourceClient.setOnDebugMessageListener(listener);
+        mUIClient.setOnDebugMessageListener(listener);
     }
 
     /**
