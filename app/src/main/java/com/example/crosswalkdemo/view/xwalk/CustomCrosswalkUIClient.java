@@ -1,6 +1,6 @@
 package com.example.crosswalkdemo.view.xwalk;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.example.crosswalkdemo.listener.OnDebugMessageListener;
 import com.example.crosswalkdemo.listener.OnUrlChangedListener;
@@ -15,7 +15,7 @@ import org.xwalk.core.XWalkView;
  * Created on 31.01.17.
  */
 public class CustomCrosswalkUIClient extends XWalkUIClient {
-    @SuppressWarnings("all") private static final String TAG = CustomCrosswalkUIClient.class.getSimpleName();
+    private static final String TAG = CustomCrosswalkUIClient.class.getSimpleName();
     @Nullable private OnDebugMessageListener mMessageListener;
     @Nullable private OnUrlChangedListener mChangedListener;
 

@@ -1,8 +1,9 @@
 package com.example.crosswalkdemo.view.xwalk;
 
 import android.net.http.SslError;
-import android.support.annotation.Nullable;
 import android.webkit.ValueCallback;
+
+import androidx.annotation.Nullable;
 
 import com.example.crosswalkdemo.listener.OnDebugMessageListener;
 

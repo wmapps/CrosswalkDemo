@@ -1,9 +1,10 @@
 package com.example.crosswalkdemo.view;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+
+import androidx.annotation.Nullable;
 
 import com.example.crosswalkdemo.listener.OnDebugMessageListener;
 import com.example.crosswalkdemo.listener.OnUrlChangedListener;
@@ -68,9 +69,11 @@ public class CustomCrosswalkWebView extends XWalkView {
                 final Method getBridgeMethod = XWalkView.class.getDeclaredMethod("getBridge");
                 getBridgeMethod.setAccessible(true);
                 final XWalkViewBridge xWalkViewBridge = (XWalkViewBridge) getBridgeMethod.invoke(view);
-                final XWalkSettingsInternal xWalkSettingsInternal = xWalkViewBridge.getSettings();
-                xWalkSettingsInternal.setUserAgentString(userAgent);
-                xWalkSettingsInternal.setAllowUniversalAccessFromFileURLs(true);
+                if (xWalkViewBridge != null) {
+                    final XWalkSettingsInternal xWalkSettingsInternal = xWalkViewBridge.getSettings();
+                    xWalkSettingsInternal.setUserAgentString(userAgent);
+                    xWalkSettingsInternal.setAllowUniversalAccessFromFileURLs(true);
+                }
             }
         } catch (Exception ignored) {
 
